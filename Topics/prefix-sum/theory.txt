@@ -1,0 +1,35 @@
+Prefix-Sum is used to compute the sum of a specific contigous subarray.
+Best to be used when we have queries, since it is a pre-computation technique.
+
+1-D Array =>
+	to get the prefix-sum array:
+		pre[i] = pre[i] + arr[i]
+		
+	to solve queries(l,r):
+		pre(l,r) = pre[r] - pre[l]
+		
+		
+2-D Array =>
+	to get the prefix-sum of matrix:
+		*General formula => mat[i,j] = mat[i-1][j] + mat[i][j-1] - mat[i-1][j-1] + arr[i][j]
+		
+		*Using corner cases =>
+			if i==0 && j==0:
+				mat[i][j] = a[i][j]
+			if i==0 && j>0:
+				mat[i][j] = mat[i][j-1] + a[i][j]
+			if i>0 && j==0:
+				mat[i][j] = mat[i-1][j] + a[i][j]
+		
+	to solve queries(r1,c1,r2,c2):
+		*Result =>
+			res = mat[r2][c2]
+			if(r1>0){
+				res = res - mat[r1-1][c2]
+			}
+			if(c1>0){
+				res = res - mat[r2][c1-1]
+			}
+			if(r1>0 && c1>0){
+				res = res + mat[r1-1][c1-1]
+			}
